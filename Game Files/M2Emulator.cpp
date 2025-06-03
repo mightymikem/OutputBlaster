@@ -95,6 +95,26 @@ static int WindowsLoop()
 		Outputs->SetValue(OutputLampView3, !!(data2 & 0x20));
 		Outputs->SetValue(OutputLampView4, !!(data2 & 0x40));
 	}
+	else if ((detectedGameId == 21) || (detectedGameId == 22) || (detectedGameId == 23))
+	{
+		INT_PTR data = helpers->ReadIntPtr(0x174CF0, true);
+		//INT_PTR drive = helpers->ReadIntPtr(0x174CF4, true);
+		//INT_PTR RambaseA = helpers->ReadIntPtr(0x5AA8F0, false);
+		//INT_PTR RambaseB = helpers->ReadIntPtr(0x5AA8F4, false);
+		//UINT8 data1 = helpers->ReadByte(RambaseA + 0x420, false);
+		//INT_PTR data2 = helpers->ReadIntPtr(RambaseB + 0x500, false);
+		//UINT8 data3 = helpers->ReadByte(data2 + 0x578B64, false);
+
+		Outputs->SetValue(OutputLampStart, !!(data & 0x04));
+		Outputs->SetValue(OutputLampLeader, !!(data & 0x08));
+		Outputs->SetValue(OutputLampView3, !!(data & 0x80));
+		Outputs->SetValue(OutputLampView1, !!(data & 0x10));
+		Outputs->SetValue(OutputLampView2, !!(data & 0x20));
+		Outputs->SetValue(OutputLampView4, !!(data & 0x40));
+		//Outputs->SetValue(OutputRawDrive, drive);
+		//Outputs->SetValue(OutputSpeedo, data1);
+		//Outputs->SetValue(OutputDash, data3);
+	}
 	return 0;
 }
 
@@ -139,6 +159,10 @@ void M2Emulator::OutputsGameLoop()
 		else if (FindWindowA(0, ("Sega Touring Car Championship")))  detectedGameId = 18;
 		else if (FindWindowA(0, ("Sega Touring Car Championship (Rev B)")))  detectedGameId = 19;
 		else if (FindWindowA(0, ("Over Rev (Model 2B)")))  detectedGameId = 20;
+		else if (FindWindowA(0, ("ManxTT Superbike (Rev C, Twin)")))  detectedGameId = 21;
+		else if (FindWindowA(0, ("ManxTT Superbike (Rev D, Deluxe)")))  detectedGameId = 22;
+		else if (FindWindowA(0, ("Motor Raid")))  detectedGameId = 23;
+
 		
 		if (detectedGameId == 1)
 		{
@@ -219,6 +243,18 @@ void M2Emulator::OutputsGameLoop()
 		else if (detectedGameId == 20)
 		{
 			m_game.name = "Over Rev (Model 2B)";
+		}
+		else if (detectedGameId == 21)
+		{
+			m_game.name = "ManxTT Superbike (Rev C, Twin)";
+		}
+		else if (detectedGameId == 22)
+		{
+			m_game.name = "ManxTT Superbike (Rev D, Deluxe)";
+		}
+		else if (detectedGameId == 23)
+		{
+			m_game.name = "Motor Raid";
 		}
 		
 		if (detectedGameId != 0)
