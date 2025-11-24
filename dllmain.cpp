@@ -24,6 +24,7 @@ along with Output Blaster.If not, see < https://www.gnu.org/licenses/>.*/
 #include "Game Files/BattleGear4.h"
 #include "Game Files/BattleGear4Tuned.h"
 #include "Game Files/BattlePod.h"
+#include "Game Files/Batman.h"
 #include "Game Files/Cars.h"
 #include "Game Files/ChaseHQ2.h"
 #include "Game Files/CrazyRide.h"
@@ -241,6 +242,9 @@ DWORD WINAPI OutputsLoop(LPVOID lpParam)
 		break;
 	case 0x8505c794:
 		game = new BattlePod;
+		break;
+	case 0xB818B0BD:
+		game = new Batman;
 		break;
 	case 0x55f66578:
 		game = new TransformersShadowsRising;
