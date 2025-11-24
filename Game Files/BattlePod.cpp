@@ -37,26 +37,26 @@ static int WindowsLoop()
 
 
 
-	int ledRearWindowsRed = (ledRearWindowsRGB >> 8) & 0xF;
+	int ledRearWindowsRed = ledRearWindowsRGB & 0xF;
 	int ledRearWindowsGreen = (ledRearWindowsRGB >> 4) & 0xF;
-	int ledRearWindowsBlue = ledRearWindowsRGB & 0xF;
+	int ledRearWindowsBlue = (ledRearWindowsRGB >> 8) & 0xF;
 
-	int ledRearCoverRed = (ledRearCoverRGB >> 8) & 0xF;
+	int ledRearCoverRed = ledRearCoverRGB & 0xF;
 	int ledRearCoverGreen = (ledRearCoverRGB >> 4) & 0xF;
-	int ledRearCoverBlue = ledRearCoverRGB & 0xF;
+	int ledRearCoverBlue = (ledRearCoverRGB >> 8) & 0xF;
 
 	Outputs->SetValue(Output1pAirFront, !!(air & 1));
 	Outputs->SetValue(OutputLampView1, !!(view & 1));
 	Outputs->SetValue(OutputLampView2, !!(ledRearPanelA & 1));
 	Outputs->SetValue(OutputLampView3, !!(ledRearPanelB & 1));
 	Outputs->SetValue(OutputLampView4, !!(ledRearPanelC & 1));
-	Outputs->SetValue(OutputLampRed, ledRearWindowsRed);
-	Outputs->SetValue(OutputLampGreen, ledRearWindowsGreen);
-	Outputs->SetValue(OutputLampBlue, ledRearWindowsBlue);
-	Outputs->SetValue(OutputLampRed2, ledRearCoverRed);
-	Outputs->SetValue(OutputLampGreen2, ledRearCoverGreen);
-	Outputs->SetValue(OutputLampBlue2, ledRearCoverBlue);
-	Outputs->SetValue(OutputFFB, (vibration / 16) * 100);
+	Outputs->SetValue(OutputLampRed, (ledRearWindowsRed / 15.0) * (MaxScaleOutput * 1.0));
+	Outputs->SetValue(OutputLampGreen, (ledRearWindowsGreen / 15.0) * (MaxScaleOutput * 1.0));
+	Outputs->SetValue(OutputLampBlue, (ledRearWindowsBlue / 15.0) * (MaxScaleOutput * 1.0));
+	Outputs->SetValue(OutputLampRed2, (ledRearCoverRed / 15.0) * (MaxScaleOutput * 1.0));
+	Outputs->SetValue(OutputLampGreen2, (ledRearCoverGreen / 15.0) * (MaxScaleOutput * 1.0));
+	Outputs->SetValue(OutputLampBlue2, (ledRearCoverBlue / 15.0) * (MaxScaleOutput * 1.0));
+	Outputs->SetValue(OutputFFB, (vibration / 16.0) * 100.0);
 	return 0;
 }
 
