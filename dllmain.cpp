@@ -67,6 +67,7 @@ along with Output Blaster.If not, see < https://www.gnu.org/licenses/>.*/
 #include "Game Files/SegaRacingClassic.h"
 #include "Game Files/SegaRally3.h"
 #include "Game Files/SRG.h"
+#include "Game Files/SuperBikes2.h"
 #include "Game Files/TheWalkingDead.h"
 #include "Game Files/Transformers.h"
 #include "Game Files/TransformersShadowsRising.h"
@@ -252,7 +253,9 @@ DWORD WINAPI OutputsLoop(LPVOID lpParam)
 	case 0x84d7854b:
 		game = new HarleyDavidson;
 		break;
-
+	case 0xFE7AFFF4:
+		game = new SuperBikes2;
+		break;
 	default:
 		break;
 	}
